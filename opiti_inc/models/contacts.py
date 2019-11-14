@@ -1,4 +1,4 @@
-from opiti_inc import db, ma, jwt
+from opiti_inc import db#, ma, jwt
 from sqlalchemy import Column, Integer, String, Date, DateTime, ARRAY, Float, ForeignKey, BigInteger, SmallInteger, BOOLEAN 
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -14,8 +14,8 @@ class ContactModel(db.Model):
 	contact_id = Column(Integer, primary_key=True, autoincrement=True)
 	name = Column(String(50), unique=False, nullable=False)
 	email = Column(String(50), unique=False, nullable=False)
-	phone = Column(String(100), nullable=True)
-	country = Column(String(100), nullable=False)
+	# phone = Column(String(100), nullable=True)
+	# country = Column(String(100), nullable=False)
 	message = Column(String(500), nullable=False)
 	
 	# Standard

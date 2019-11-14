@@ -1,5 +1,6 @@
 import os
 import json
+import uuid
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -11,12 +12,13 @@ class Config(object):
 	"""
 	DEBUG = False
 	
+	
 
 class DevelopmentConfig(Config):
 	""" Configuration for Development."""
 	
 	DEBUG = True
-	SECRET_KEY = '3xtr3m3ly-pr1v@t3-@p1-k3y'
+	
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'instance', 'opiti_inc.sqlite')
 	# POSTGRES = {
 	# 'user': 'spatialadmin',
@@ -26,6 +28,7 @@ class DevelopmentConfig(Config):
 	# 'port': '5432',
 	# }
 	# SQLALCHEMY_DATABASE_URI = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES # for postgresql
+	SECRET_KEY = '3xtr3m3ly-pr1v@t3-@p1-k3y'
 	CUSTOM_DB_FLAG = 'local'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	JWT_TOKEN_LOCATION = ['headers', 'cookies']	# Configure app to store JWTs in cookies
@@ -46,12 +49,9 @@ class ProductionConfig(Config):
 	Configurations for Production.
 
 	"""
-	# with open('/etc/opiti_inc_flask_config.json') as config_file:
-	# 	config = json.load(config_file)
-
+	
 	TESTING = False
-	# SECRET_KEY = config.get('SECRET_KEY')
-	SECRET_KEY = '3xtr3m3ly-pr1v@t3-@p1-k3y'
+	SECRET_KEY = uuid.uuid4().hex
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'instance', 'opiti_inc.sqlite')
 	# SQLALCHEMY_DATABASE_URI = config.get('SQLALCHEMY_DATABASE_URI')
 	CUSTOM_DB_FLAG = 'production'

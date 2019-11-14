@@ -8,9 +8,9 @@ from flask import (
 def index():
 	return render_template('index.html')
 
-@site.route('/contact')
-def contact():
-	return render_template('pages/contact.html')
+# @site.route('/contact', methods=['GET', 'POST'])
+# def contact():
+# 	return render_template('pages/contact.html')
 
 @site.route('/solution')
 def solution():
