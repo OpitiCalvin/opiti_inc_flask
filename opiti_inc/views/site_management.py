@@ -8,13 +8,13 @@ from flask import (
 def index():
 	return render_template('index.html')
 
-# @site.route('/contact', methods=['GET', 'POST'])
-# def contact():
-# 	return render_template('pages/contact.html')
+@site.route('/about-me')
+def about():
+	return render_template('pages/about.html')
 
-@site.route('/solution')
+@site.route('/sample-apps')
 def solution():
-	return render_template('pages/products.html')
+	return render_template('pages/sample_apps.html')
 
 @site.route('/skills')
 def expertise():
