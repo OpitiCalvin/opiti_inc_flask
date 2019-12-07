@@ -14,8 +14,9 @@ class ContactModel(db.Model):
 	contact_id = Column(Integer, primary_key=True, autoincrement=True)
 	name = Column(String(50), unique=False, nullable=False)
 	email = Column(String(50), unique=False, nullable=False)
-	# phone = Column(String(100), nullable=True)
-	# country = Column(String(100), nullable=False)
+	phone = Column(String(100), nullable=True)
+	country = Column(String(100), nullable=False)
+	subject = Column(String(100), nullable = False)
 	message = Column(String(500), nullable=False)
 	
 	# Standard

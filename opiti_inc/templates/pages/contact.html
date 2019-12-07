@@ -6,6 +6,7 @@
 
 {% block styles%}
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="{{ url_for('static', filename='intl-tel-input/css/intlTelInput.min.css')}}" rel="stylesheet">
 {% endblock %}
 	
 {% block header %}
@@ -57,23 +58,34 @@
 						</div>
 
 						<div class="row form-group">
+							<div class="col-md-6">
+								<label for="phone">Phone</label>
+								<input type="tel" id="phone" name="phone" class="form-control" placeholder="012345678" required>
+							</div>
+							<div class="col-md-6">
+								<label for="country">Country</label>
+								<input type="text" id="country" name="country" class="form-control" placeholder="Country" required readonly>
+							</div>
+						</div>
+
+						<div class="row form-group">
 							<div class="col-md-12">
 								<label for="email">Email</label>
 								<input type="email" id="email" name="email" class="form-control" placeholder="Your email address" required>
 							</div>
 						</div>
 
-						<!-- <div class="row form-group">
+						<div class="row form-group">
 							<div class="col-md-12">
 								<label for="subject">Subject</label>
-								<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+								<input type="text" id="subject" name="subject" class="form-control" placeholder="Your subject of this message" required>
 							</div>
-						</div> -->
+						</div>
 
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label for="message">Message</label>
-								<textarea name="message" id="message" name="message" cols="30" rows="10" class="form-control" placeholder="Say something about us" required></textarea>
+								<textarea name="message" id="message" name="message" cols="30" rows="10" class="form-control" placeholder="Your message here" required></textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -87,3 +99,35 @@
 		</div>
 	</div>
 {% endblock%}	
+
+{% block scripts%}
+<script type="text/javascript" src="{{ url_for('static', filename='intl-tel-input/js/intlTelInput.min.js')}}"></script>
+<script>
+	var input = document.querySelector('#phone');
+  	var phone = document.getElementById("phone");
+  	var country = document.getElementById("country");
+
+  	var iti = intlTelInput(input,{
+  		nationalMode: true,
+  		placeholderNumberType: "FIXED_LINE_OR_MOBILE",
+      	preferredCountries: [ "za", "ke", "us", "gb" ],
+      	utilsScript: "{{ url_for('static', filename='intl-tel-input/js/utils.js') }}",
+  	});
+  	
+  	input.addEventListener("change", updateValue);
+
+  	function updateValue(e){
+    	// e.preventDefault();
+    	var num = iti.getNumber(),
+      	valid = iti.isValidNumber();
+      	if (valid == false){
+        	alert("Please enter valid number.")
+      	} else {
+        	var count = iti.getSelectedCountryData();
+        	// console.log(count['dialCode']);
+        	country.value = count['name'];
+        	phone.value = num;
+      	}
+ 	}
+</script>
+{% endblock %}
