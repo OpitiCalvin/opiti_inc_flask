@@ -23,9 +23,9 @@ def contact():
 				"phone": data['phone'],
 				"country": data['country'],
 				"subject": data['subject'],
-				"message": data['message'],
-				"created_by": 'api link'
+				"message": data['message']
 			}
+			print(f"msg: {msg}")
 
 			try:
 				url = "https://blog.opiticonsulting.com/api/contacts/"
