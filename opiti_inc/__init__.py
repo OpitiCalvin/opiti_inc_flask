@@ -11,8 +11,8 @@ from config import app_config
 db = SQLAlchemy()
 # ma = Marshmallow()
 migrate = Migrate()
-login_manager = LoginManager()
-jwt = JWTManager()
+# login_manager = LoginManager()
+# jwt = JWTManager()
 
 # images = UploadSet('images', IMAGES)
 # photos = UploadSet('photos', IMAGES)
@@ -70,8 +70,8 @@ def initialize_extensions(app):
 	db.init_app(app)
 	# ma.init_app(app)
 	migrate.init_app(app, db)
-	login_manager.init_app(app)
-	jwt.init_app(app)
+	# login_manager.init_app(app)
+	# jwt.init_app(app)
 
 def register_blueprints(app):
 	r"""
